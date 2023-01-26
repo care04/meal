@@ -9,8 +9,33 @@ export function makeServer({ environment = "development" } = {}) {
     },
 
     seeds(server) {
-      server.create("recipe", { name: "recipe one" });
-      server.create("recipe", { name: "recipe two" });
+      server.create("recipe", {
+        name: "recipe one",
+        serving: 2,
+        id: 3,
+        ingrediants: [
+          { name: "Ingrediant 1", amount: "1 cup" },
+          { name: "Ingrediant 2", amount: "3 tsp" },
+          { name: "Ingrediant 3", amount: "1/2 cup" },
+          { name: "Ingrediant 4", amount: "1 TBSP" }
+        ],
+        description: "this is the description for the first recipe",
+        instructions:
+          "these are the instrucitions for the first recipe in the recipe server",
+      });
+      server.create("recipe", {
+        name: "recipe two",
+        serving: 4,
+        id: 2,
+        ingrediants: [
+          { name: "Ingrediant 1", amount: "3 cup" },
+          { name: "Ingrediant 2", amount: "3 tsp" },
+          { name: "Ingrediant 3", amount: "1/4 cup" },
+        ],
+        description: "this is the description for the second recipe",
+        instructions:
+          "these are the instrucitions for the first recipe in the recipe server",
+      });
     },
 
     routes() {
