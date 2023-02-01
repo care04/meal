@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RecipeBox from "../components/RecipeBox.vue";
+import RecipeView from "../components/RecipeView.vue";
 import { onBeforeMount, ref } from "vue";
 const recipes = ref();
 onBeforeMount(() => {
@@ -13,6 +13,6 @@ onBeforeMount(() => {
 <template>
   <main>
     <h1>Recipes</h1>
-    <RecipeBox v-for="recipe in recipes" :recipe="recipe" :key="recipe.name"/>
+    <RecipeView v-for="recipe in recipes" :recipe="recipe" :key="recipe.name"/>
   </main>
 </template>
