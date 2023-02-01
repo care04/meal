@@ -44,6 +44,11 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/recipes", (schema) => {
         return schema.recipes.all();
       });
+      this.get("/recipes/:id", (schema, request) => {
+        const id = request.params.id;
+
+        return schema.recipes.find(id);
+      });
     },
   });
 

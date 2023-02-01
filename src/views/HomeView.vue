@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import RecipeView from "../components/RecipeView.vue";
 import { onBeforeMount, ref } from "vue";
 const recipes = ref();
 onBeforeMount(() => {
@@ -13,6 +12,15 @@ onBeforeMount(() => {
 <template>
   <main>
     <h1>Recipes</h1>
-    <RecipeView v-for="recipe in recipes" :recipe="recipe" :key="recipe.name"/>
+    <div v-for="recipe in recipes" :key="recipe.id">
+      <router-link
+        :to="{
+          name: 'recipe',
+          params: { id: recipe.id },
+        }"
+      >
+        <button>{{ recipe.name }}</button>
+      </router-link>
+    </div>
   </main>
 </template>
