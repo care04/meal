@@ -49,6 +49,11 @@ export function makeServer({ environment = "development" } = {}) {
 
         return schema.recipes.find(id);
       });
+      this.post("/recipes", (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+        schema.recipes.create(attrs);
+        return schema.recipes.all();
+      });
     },
   });
 

@@ -14,15 +14,17 @@ onBeforeMount(() => {
 </script>
 <template>
   <div>
-    <p>recipe box component</p>
     <h2>
       {{ recipe.name ?? "recipe name" }}{{ "             Serving Size: "
       }}{{ recipe.serving }}
     </h2>
     <h3>serving size: {{ recipe.serving }}</h3>
+    <h2>Description</h2>
     <p>{{ recipe.description }}</p>
+    <h2>Ingrediants</h2>
     <div v-for="ingrediant in recipe.ingrediants" :key="ingrediant.name">
       <p>{{ ingrediant.amount }} {{ ingrediant.name }}</p>
+      <br />
     </div>
     <p>Instructions: {{ recipe.instructions }}</p>
   </div>

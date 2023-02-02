@@ -11,6 +11,7 @@ onBeforeMount(() => {
 </script>
 <template>
   <main>
+    <router-link :to="{ name: 'newRecipe' }"><button>+</button></router-link>
     <h1>Recipes</h1>
     <div v-for="recipe in recipes" :key="recipe.id">
       <router-link
