@@ -1,31 +1,20 @@
 <script setup lang="ts">
-import { ref, onBeforeMount } from "vue";
-const props = defineProps<{
-  id?: string;
-}>();
-const recipe = ref();
-onBeforeMount(() => {
-  fetch("/api/recipes/" + props.id)
-    .then((res) => res.json())
-    .then((json) => {
-      recipe.value = json.recipe;
-    });
-});
+import { useRecipeStore } from "../stores/recipeStore";
+const store = useRecipeStore();
 </script>
 <template>
-  <div>
+  <div v-if="store.recipe.name">
     <h2>
-      {{ recipe.name ?? "recipe name" }}{{ "             Serving Size: "
-      }}{{ recipe.serving }}
+      {{ store.recipe.name ?? "recipe name" }}
     </h2>
-    <h3>serving size: {{ recipe.serving }}</h3>
+    <h3>serving size: {{ store.recipe.serving }}</h3>
     <h2>Description</h2>
-    <p>{{ recipe.description }}</p>
+    <p>{{ store.recipe.description }}</p>
     <h2>Ingrediants</h2>
-    <div v-for="ingrediant in recipe.ingrediants" :key="ingrediant.name">
+    <div v-for="ingrediant in store.recipe.ingrediants" :key="ingrediant.name">
       <p>{{ ingrediant.amount }} {{ ingrediant.name }}</p>
       <br />
     </div>
-    <p>Instructions: {{ recipe.instructions }}</p>
+    <p>Instructions: {{ store.recipe.instructions }}</p>
   </div>
 </template>

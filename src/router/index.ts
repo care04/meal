@@ -15,7 +15,6 @@ const router = createRouter({
       path: "/:id",
       name: "recipe",
       component: RecipeBox,
-      props: true,
     },
     {
       path: "/newRecipe",

@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import { useRecipeStore } from "./stores/recipeStore";
+import { onBeforeMount } from "vue";
+const store = useRecipeStore();
+onBeforeMount(() => {
+  store.getRecipes();
+})
 </script>
 
 <template>
