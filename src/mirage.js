@@ -54,6 +54,12 @@ export function makeServer({ environment = "development" } = {}) {
         schema.recipes.create(attrs);
         return schema.recipes.all();
       });
+      this.patch("/recipes/:id", (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+        const id = attrs.id;
+        schema.recipes.find(id).update(attrs);
+        return schema.recipes.all();
+      });
     },
   });
 
