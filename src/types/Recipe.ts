@@ -1,12 +1,12 @@
 export interface Recipe {
   name: string;
   serving: number;
-  ingrediants: Ingrediant[];
+  ingredients: Ingredient[];
   description: string;
   instructions: string;
   id: number;
 }
-export interface Ingrediant {
+export interface Ingredient {
   amount: string;
   name: string;
 }

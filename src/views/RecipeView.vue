@@ -11,10 +11,12 @@ const store = useRecipeStore();
     <h2>Description</h2>
     <p>{{ store.recipe.description }}</p>
     <h2>Ingrediants</h2>
-    <div v-for="ingrediant in store.recipe.ingrediants" :key="ingrediant.name">
-      <p>{{ ingrediant.amount }} {{ ingrediant.name }}</p>
+    <li v-for="ingredient in store.recipe.ingredients" :key="ingredient.name">
+      <p>{{ ingredient.amount }} {{ ingredient.name }}</p>
       <br />
-    </div>
-    <p>Instructions: {{ store.recipe.instructions }}</p>
+    </li>
+    <h2>Instructions:</h2>
+    <br />
+    <p>{{ store.recipe.instructions }}</p>
   </div>
 </template>

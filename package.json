@@ -13,6 +13,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.7.1",
     "axios": "^1.3.1",
     "miragejs": "^0.1.47",
     "pinia": "^2.0.28",
@@ -37,6 +38,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "start-server-and-test": "^1.15.2",
+    "supabase": "^1.37.1",
     "typescript": "~4.7.4",
     "vite": "^4.0.0",
     "vitest": "^0.25.6",

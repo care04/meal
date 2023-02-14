@@ -4,7 +4,7 @@ import { useRecipeStore } from "./stores/recipeStore";
 import { onBeforeMount } from "vue";
 const store = useRecipeStore();
 onBeforeMount(() => {
-  store.getRecipes();
+  store.getRecipesSupa();
 })
 </script>
 

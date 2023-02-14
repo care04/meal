@@ -7,15 +7,16 @@ var ingrediant = {
   name: "",
 };
 function addIngrediant() {
-  if (recipeStore.recipe.ingrediants) {
-    recipeStore.recipe.ingrediants.push(ingrediant);
+  if (recipeStore.recipe.ingredients) {
+    recipeStore.recipe.ingredients.push(ingrediant);
   } else {
-    recipeStore.recipe.ingrediants = [ingrediant];
+    recipeStore.recipe.ingredients = [ingrediant];
   }
   ingrediant = { amount: "", name: "" };
 }
 function save() {
-  recipeStore.saveRecipe(recipeStore.recipe);
+  // recipeStore.saveRecipe(recipeStore.recipe);
+  recipeStore.addRecipeSupa(recipeStore.recipe);
   rotuer.push("/");
 }
 </script>
@@ -37,10 +38,10 @@ function save() {
     <div class="form-floating mb-3">
       <label>Ingrediants</label><br />
       <li
-        v-for="ingrediant in recipeStore.recipe.ingrediants"
-        :key="ingrediant.name"
+        v-for="ingredient in recipeStore.recipe.ingredients"
+        :key="ingredient.name"
       >
-        {{ ingrediant.amount }} {{ "   " }} {{ ingrediant.name }}
+        {{ ingredient.amount }} {{ "   " }} {{ ingredient.name }}
       </li>
       <div>
         <label>name</label><br />
