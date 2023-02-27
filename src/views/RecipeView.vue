@@ -10,9 +10,9 @@ const store = useRecipeStore();
     <h3>serving size: {{ store.recipe.serving }}</h3>
     <h2>Description</h2>
     <p>{{ store.recipe.description }}</p>
-    <h2>Ingrediants</h2>
+    <h2>Ingredients</h2>
     <li v-for="ingredient in store.recipe.ingredients" :key="ingredient.name">
-      <p>{{ ingredient.amount }} {{ ingredient.name }}</p>
+      <p>{{ ingredient.unit }} {{ ingredient.name }}</p>
       <br />
     </li>
     <h2>Instructions:</h2>

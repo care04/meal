@@ -1,23 +1,57 @@
 <script setup lang="ts">
 import rotuer from "../router/index";
 import { useRecipeStore } from "../stores/recipeStore";
+import { ref } from "vue";
 const recipeStore = useRecipeStore();
-var ingrediant = {
-  amount: "",
+interface Ingredient {
+  name: String;
+  unit: String;
+}
+var ingredient: Ingredient = {
+  unit: "",
   name: "",
 };
-function addIngrediant() {
-  if (recipeStore.recipe.ingredients) {
-    recipeStore.recipe.ingredients.push(ingrediant);
+var ingredientError = ref("");
+var adding = ref(false);
+function checkIngredient() {
+  if (ingredient.unit === "" || ingredient.name === "") {
+    ingredientError.value =
+      "need both ingredient unit field and ingredient name field filled in";
   } else {
-    recipeStore.recipe.ingredients = [ingrediant];
+    ingredientError.value = "";
+    addingredient();
   }
-  ingrediant = { amount: "", name: "" };
+}
+function checkNotEmpty() {
+  //
+}
+function addingredient() {
+  if (recipeStore.edit === true) {
+    recipeStore.ingredientsToAdd.push(ingredient);
+  }
+  recipeStore.ingredients.push(ingredient);
+  adding.value = false;
+  ingredient = { unit: "", name: "" };
 }
 function save() {
-  // recipeStore.saveRecipe(recipeStore.recipe);
-  recipeStore.addRecipeSupa(recipeStore.recipe);
+  if (recipeStore.edit === false) {
+    recipeStore.addRecipeSupa(recipeStore.recipe);
+  } else {
+    recipeStore.updateRecipeSupa(recipeStore.recipe);
+  }
   rotuer.push("/");
+}
+function cancel() {
+  adding.value = false;
+  ingredient = { name: "", unit: "" };
+  ingredientError.value = "";
+}
+function deleteIngredient(ingredient: Ingredient) {
+  var arrayIndex = recipeStore.ingredients.indexOf(ingredient);
+  var addArrayIndex = recipeStore.ingredientsToAdd.indexOf(ingredient);
+  recipeStore.ingredients.splice(arrayIndex, 1);
+  recipeStore.ingredientsToAdd.splice(addArrayIndex, 1);
+  recipeStore.ingredientsToRemove.push(ingredient);
 }
 </script>
 <template>
@@ -36,19 +70,18 @@ function save() {
       <input type="text" v-model="recipeStore.recipe.description" />
     </div>
     <div class="form-floating mb-3">
-      <label>Ingrediants</label><br />
-      <li
-        v-for="ingredient in recipeStore.recipe.ingredients"
-        :key="ingredient.name"
-      >
-        {{ ingredient.amount }} {{ "   " }} {{ ingredient.name }}
+      <label>ingredients</label><button @click="adding = true">+</button><br />
+      <li v-for="ingredient in recipeStore.ingredients" :key="ingredient.name">
+        <button @click="deleteIngredient(ingredient)">delete</button>{{ ingredient.unit }} {{ "   " }} {{ ingredient.name }}
       </li>
-      <div>
+      <div v-if="adding === true">
+        <div v-if="ingredientError != ''">{{ ingredientError }}</div>
         <label>name</label><br />
-        <input type="text" v-model="ingrediant.name" /><br />
-        <label>amount</label><br />
-        <input type="text" v-model="ingrediant.amount" /><br />
-        <button @click="addIngrediant()">Add Ingrediant</button>
+        <input type="text" v-model="ingredient.name" /><br />
+        <label>unit</label><br />
+        <input type="text" v-model="ingredient.unit" /><br />
+        <button @click="cancel()">cancel</button
+        ><button @click="checkIngredient()">Add ingredient</button>
       </div>
     </div>
     <div class="form-floating mb-3">
