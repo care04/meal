@@ -58,8 +58,7 @@ export const useRecipeStore = defineStore("recipe", {
       this.recipes.forEach((recipe) => {
         if (recipe.id === this.recipe.id) {
           const recipeIndex = this.recipes.indexOf(recipe);
-          this.recipes.splice(recipeIndex, 1);
-          this.recipes.push(data);
+          this.recipes.splice(recipeIndex, 1, data);
           console.log(error);
         }
       });
