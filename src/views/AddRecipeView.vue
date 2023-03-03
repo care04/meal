@@ -2,6 +2,17 @@
 import rotuer from "../router/index";
 import { useRecipeStore } from "../stores/recipeStore";
 import { ref } from "vue";
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+const schema = yup.object({
+  name: yup.string().required(),
+  serving: yup
+    .string()
+    .required()
+    .matches(/^[0-9]+$/, "Must be numeric"),
+  description: yup.string().required(),
+  instructions: yup.string().required(),
+});
 const recipeStore = useRecipeStore();
 interface Ingredient {
   name: String;
@@ -21,9 +32,6 @@ function checkIngredient() {
     ingredientError.value = "";
     addingredient();
   }
-}
-function checkNotEmpty() {
-  //
 }
 function addingredient() {
   if (recipeStore.edit === true) {
@@ -55,24 +63,30 @@ function deleteIngredient(ingredient: Ingredient) {
 }
 </script>
 <template>
-  <div>
+  <Form :validation-schema="schema" @submit="save">
     <h3>New Recipe</h3>
     <div class="form-floating mb-3">
       <label>Name</label><br />
-      <input type="text" v-model="recipeStore.recipe.name" />
+      <Field name="name" v-model="recipeStore.recipe.name" />
+      <ErrorMessage name="name" />
     </div>
     <div class="form-floating mb-3">
       <label>Serving Size</label><br />
-      <input type="text" v-model="recipeStore.recipe.serving" />
+      <Field name="serving" v-model="recipeStore.recipe.serving" />
+      <ErrorMessage name="serving" />
     </div>
     <div class="form-floating mb-3">
       <label>Description</label><br />
-      <input type="text" v-model="recipeStore.recipe.description" />
+      <Field name="description" v-model="recipeStore.recipe.description" />
+      <ErrorMessage name="description" />
     </div>
     <div class="form-floating mb-3">
-      <label>ingredients</label><button @click="adding = true">+</button><br />
+      <label>ingredients</label
+      ><button @click="adding = true" type="button">+</button><br />
       <li v-for="ingredient in recipeStore.ingredients" :key="ingredient.name">
-        <button @click="deleteIngredient(ingredient)">delete</button>{{ ingredient.unit }} {{ "   " }} {{ ingredient.name }}
+        <button @click="deleteIngredient(ingredient)" type="button">
+          delete</button
+        >{{ ingredient.unit }} {{ "   " }} {{ ingredient.name }}
       </li>
       <div v-if="adding === true">
         <div v-if="ingredientError != ''">{{ ingredientError }}</div>
@@ -80,14 +94,17 @@ function deleteIngredient(ingredient: Ingredient) {
         <input type="text" v-model="ingredient.name" /><br />
         <label>unit</label><br />
         <input type="text" v-model="ingredient.unit" /><br />
-        <button @click="cancel()">cancel</button
-        ><button @click="checkIngredient()">Add ingredient</button>
+        <button @click="cancel()" type="button">cancel</button
+        ><button @click="checkIngredient()" type="button">
+          Add ingredient
+        </button>
       </div>
     </div>
     <div class="form-floating mb-3">
       <label>Instructions </label><br />
-      <input type="text" v-model="recipeStore.recipe.instructions" />
+      <Field name="instructions" v-model="recipeStore.recipe.instructions" />
+      <ErrorMessage name="instructions" />
     </div>
-    <button @click="save">Save Recipe</button>
-  </div>
+    <button type="submit">Save Recipe</button>
+  </Form>
 </template>
