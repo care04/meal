@@ -23,6 +23,7 @@ function add() {
 </script>
 <template>
   <main>
+    <p>Add New Recipe</p>
     <button @click="add()">+</button>
     <h1>Recipes</h1>
     <div v-if="recipeStore.recipes.length > 0">

@@ -1,15 +1,17 @@
 import { defineStore } from "pinia";
-import type { Ingredient } from "../types/Recipe";
 import { supabase } from "../supabase.js";
 import type { Database } from "../types/schema";
 
+export type Recipie = Database["public"]["Tables"]["recipes"]["Row"];
+export type Ingredient = Database["public"]["Tables"]["ingredients"]["Row"];
+
 interface RecipeState {
-  recipes: Database.public.Tables.recipes.Row[];
-  recipe: Database.public.Tables.recipes.Row | null;
-  ingredients: Database.public.Tables.ingredient.row[];
+  recipes: Recipie[];
+  recipe: Recipie | null;
+  ingredients: Ingredient[];
   edit: boolean;
-  ingredientsToRemove: Array;
-  ingredientsToAdd: Array;
+  ingredientsToRemove: Ingredient[];
+  ingredientsToAdd: Ingredient[];
 }
 
 export const useRecipeStore = defineStore("recipe", {
