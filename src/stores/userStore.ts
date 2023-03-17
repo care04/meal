@@ -4,17 +4,21 @@ import { supabase } from "../supabase"
 interface UserState {
   loggedIn: Boolean;
   errorValue: String;
+  id: string;
 }
 export const useUserStore = defineStore("user", {
   state: (): UserState => ({
     loggedIn: false,
     errorValue: "",
+    id: "",
   }),
   actions: {
     async currentAuth() {
       supabase.auth.getSession().then(({ data }) => {
         if (data.session.access_token != undefined) {
           this.loggedIn = true;
+          this.id = data.session.user.id;
+          console.log(data.session.user.id);
         }
       });
     },
@@ -28,7 +32,7 @@ export const useUserStore = defineStore("user", {
         return true;
       }
     },
-    async login(password: string, email: string): Boolean {
+    async login(password: string, email: string): Promise<Boolean> {
       const {
         data: { user },
         error,
@@ -39,6 +43,7 @@ export const useUserStore = defineStore("user", {
       if (user) {
         console.log("user", user);
         this.loggedIn = true;
+        this.id = user.id;
         return true;
       }
       if (error) {

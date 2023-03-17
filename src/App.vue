@@ -14,6 +14,7 @@ onBeforeMount(() => {
 async function logOut() {
   const loggedOut = await userStore.logout();
   if (loggedOut === true) {
+    recipeStore.recipes = [];
     router.push("/");
   } else {
     window.alert(loggedOut);

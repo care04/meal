@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase.js";
 import type { Database } from "../types/schema";
+import { useUserStore } from "./userStore";
 
 export type Recipie = Database["public"]["Tables"]["recipes"]["Row"];
 export type Ingredient = Database["public"]["Tables"]["ingredients"]["Row"];
@@ -78,6 +79,8 @@ export const useRecipeStore = defineStore("recipe", {
       }
     },
     async addRecipeSupa(recipe: any) {
+      const userStore = useUserStore();
+      console.log("id", userStore);
       const { data, error } = await supabase
         .from("recipes")
         .insert([
@@ -86,6 +89,7 @@ export const useRecipeStore = defineStore("recipe", {
             serving: recipe.serving,
             instructions: recipe.instructions,
             description: recipe.description,
+            owner: userStore.id,
           },
         ])
         .select("*")
@@ -99,11 +103,13 @@ export const useRecipeStore = defineStore("recipe", {
       this.recipes.push(data);
     },
     async addIngredientSupa(ingredient: Ingredient, id: number) {
+      const userStore = useUserStore();
       const { error } = await supabase.from("ingredients").insert([
         {
           name: ingredient.name,
           unit: ingredient.unit,
           recipe_id: id,
+          owner: userStore.id,
         },
       ]);
       console.log(error);

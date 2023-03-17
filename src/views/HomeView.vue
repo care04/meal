@@ -2,6 +2,7 @@
 import { useRecipeStore } from "../stores/recipeStore";
 import rotuer from "../router/index";
 import type { DeepRecipe } from "../types/global";
+import { onBeforeMount } from "vue";
 
 const recipeStore = useRecipeStore();
 function route(id: number) {
@@ -20,6 +21,10 @@ function add() {
   recipeStore.ingredients = [];
   rotuer.push("/newRecipe");
 }
+onBeforeMount(() => {
+  console.log("onBeforeMounted")
+  recipeStore.getRecipesSupa();
+});
 </script>
 <template>
   <main>

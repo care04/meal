@@ -18,6 +18,9 @@ const router = createRouter({
       path: "/recipies",
       name: "recipies",
       component: HomeView,
+      meta: {
+        reload: true,
+      },
     },
     {
       path: "/login",
