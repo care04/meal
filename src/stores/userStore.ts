@@ -18,7 +18,6 @@ export const useUserStore = defineStore("user", {
         if (data.session.access_token != undefined) {
           this.loggedIn = true;
           this.id = data.session.user.id;
-          console.log(data.session.user.id);
         }
       });
     },
@@ -41,7 +40,6 @@ export const useUserStore = defineStore("user", {
         password: password,
       });
       if (user) {
-        console.log("user", user);
         this.loggedIn = true;
         this.id = user.id;
         return true;

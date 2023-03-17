@@ -22,7 +22,6 @@ function add() {
   rotuer.push("/newRecipe");
 }
 onBeforeMount(() => {
-  console.log("onBeforeMounted")
   recipeStore.getRecipesSupa();
 });
 </script>
