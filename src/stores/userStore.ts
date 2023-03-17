@@ -11,12 +11,21 @@ export const useUserStore = defineStore("user", {
     errorValue: "",
   }),
   actions: {
-    async logout() {
+    async currentAuth() {
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session.access_token != undefined) {
+          this.loggedIn = true;
+        }
+      });
+    },
+    async logout(): Promise<String | Boolean> {
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.log(error);
+        return error.message;
       } else {
         this.loggedIn = false;
+        return true;
       }
     },
     async login(password: string, email: string): Boolean {

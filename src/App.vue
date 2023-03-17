@@ -3,12 +3,22 @@ import { RouterLink, RouterView } from "vue-router";
 import { useRecipeStore } from "./stores/recipeStore";
 import { useUserStore } from "./stores/userStore";
 import { onBeforeMount } from "vue";
+import router from "./router/index";
 const recipeStore = useRecipeStore();
-const userStore = useUserStore()
+const userStore = useUserStore();
 
 onBeforeMount(() => {
+  userStore.currentAuth();
   recipeStore.getRecipesSupa();
-})
+});
+async function logOut() {
+  const loggedOut = await userStore.logout();
+  if (loggedOut === true) {
+    router.push("/");
+  } else {
+    window.alert(loggedOut);
+  }
+}
 </script>
 
 <template>
@@ -44,26 +54,8 @@ onBeforeMount(() => {
           <!-- <button type="button" class="btn btn-warning">Sign-up</button> -->
         </div>
         <div class="text-end" v-else>
-          <button>Logout</button>
+          <button @click="logOut()">Logout</button>
         </div>
-      </div>
-    </div>
-  </header>
-  <header class="p-3 text-bg-dark">
-    <div class="container">
-      <div
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-      >
-        <ul
-          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-        >
-          <li>
-            
-          </li>
-          <li>
-            
-          </li>
-        </ul>
       </div>
     </div>
   </header>
