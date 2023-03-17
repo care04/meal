@@ -63,7 +63,7 @@ function deleteIngredient(ingredient: Ingredient) {
 }
 </script>
 <template>
-  <Form :validation-schema="schema" @submit="save">
+  <Form :validation-schema="schema" @submit="save" class="mt-6">
     <h3>New Recipe</h3>
     <div class="form-floating">
       <Field
@@ -103,10 +103,12 @@ function deleteIngredient(ingredient: Ingredient) {
       <button @click="adding = true" type="button" class="btn btn-outline-info btn-sm">+</button></label
       >
     </div>
-    <li v-for="ingredient in recipeStore.ingredients" :key="ingredient.name">
-      <button @click="deleteIngredient(ingredient)" type="button">delete</button
-      >{{ ingredient.unit }} {{ "   " }} {{ ingredient.name }}
-    </li>
+    <div class="mb-3">
+      <li v-for="ingredient in recipeStore.ingredients" :key="ingredient.name">
+        <button @click="deleteIngredient(ingredient)" type="button" class="btn">🗑</button
+        >{{ ingredient.unit }} {{ "   " }} {{ ingredient.name }}
+      </li>
+    </div>
     <div v-if="adding === true">
       <div v-if="ingredientError != ''">{{ ingredientError }}</div>
       <div class="form-floating">

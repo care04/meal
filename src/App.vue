@@ -23,6 +23,7 @@ async function logOut() {
 </script>
 
 <template>
+  <div>
   <header class="p-3 text-bg-dark">
     <div class="container">
       <div
@@ -63,6 +64,7 @@ async function logOut() {
   <div class="container"  style="width:880px;">
     <RouterView />
   </div>
+</div>
 </template>
 
 <style scoped>

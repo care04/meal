@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <h1>Welcome To Your New Recipe Organization</h1>
     <p>
       New Way To Store your favorite recipes schedule meals and organize
