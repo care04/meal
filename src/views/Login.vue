@@ -49,3 +49,11 @@ async function signIn() {
     </form>
   </div>
 </template>
+<style scoped>
+.form-floating>label {
+  color: #888;
+}
+.form-floating {
+  margin-bottom: 0.5cm;
+}
+</style>
