@@ -105,7 +105,10 @@ function deleteIngredient(ingredient: Ingredient) {
     </div>
     <div class="mb-3">
       <li v-for="ingredient in recipeStore.ingredients" :key="ingredient.name">
-        <button @click="deleteIngredient(ingredient)" type="button" class="btn">🗑</button
+        <button @click="deleteIngredient(ingredient)" type="button" class="btn">
+          <span style="font-size: 1em; color: White">
+            <i class="fa-solid fa-trash"></i>
+          </span></button
         >{{ ingredient.unit }} {{ "   " }} {{ ingredient.name }}
       </li>
     </div>
