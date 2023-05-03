@@ -5,6 +5,7 @@ import AddRecipe from "../views/AddRecipeView.vue";
 import WelcomePage from "../views/WelcomePage.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
+import GroceryListView from "@/views/GroceryListView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,7 +42,12 @@ const router = createRouter({
       path: "/newRecipe",
       name: "newRecipe",
       component: AddRecipe,
-    }
+    },
+    {
+      path: "/groceryList",
+      name: "groceryList",
+      component: GroceryListView,
+    },
   ],
 });
 

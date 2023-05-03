@@ -30,6 +30,7 @@ function checkIngredient() {
       "need both ingredient unit field and ingredient name field filled in";
   } else {
     ingredientError.value = "";
+    console.log(ingredient);
     addingredient();
   }
 }
