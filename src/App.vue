@@ -24,47 +24,54 @@ async function logOut() {
 
 <template>
   <div>
-  <header class="p-3 text-bg-dark">
-    <div class="container">
-      <div
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-      >
-        <ul
-          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+    <header class="p-3 text-bg-dark">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
         >
-          <li>
-            <RouterLink to="/" class="nav-link px-2 text-secondary"
-              >Home</RouterLink
-            >
-          </li>
-          <li>
-            <RouterLink
-              to="/recipies"
-              v-if="userStore.loggedIn === true"
-              class="nav-link px-2 text-white"
-              >Recipies</RouterLink
-            >
-          </li>
-        </ul>
-        <div class="text-end" v-if="userStore.loggedIn === false">
-          <RouterLink to="/login" class="btn btn-outline-light me-2"
-            >Login</RouterLink
+          <ul
+            class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
           >
-          <RouterLink to="/signup" class="btn btn-outline-light me-2"
-            >Sign Up</RouterLink
-          >
-          <!-- <button type="button" class="btn btn-warning">Sign-up</button> -->
-        </div>
-        <div class="text-end" v-else>
-          <button @click="logOut()">Logout</button>
+            <li>
+              <RouterLink to="/" class="nav-link px-2 text-secondary"
+                >Home</RouterLink
+              >
+            </li>
+            <li>
+              <RouterLink
+                to="/recipies"
+                v-if="userStore.loggedIn === true"
+                class="nav-link px-2 text-white"
+                >Recipies</RouterLink
+              >
+            </li>
+            <li>
+              <RouterLink
+                to="/groceryList"
+                v-if="userStore.loggedIn === true"
+                class="nav-link px-2 text-white"
+                >Shopping</RouterLink
+              >
+            </li>
+          </ul>
+          <div class="text-end" v-if="userStore.loggedIn === false">
+            <RouterLink to="/login" class="btn btn-outline-light me-2"
+              >Login</RouterLink
+            >
+            <RouterLink to="/signup" class="btn btn-outline-light me-2"
+              >Sign Up</RouterLink
+            >
+          </div>
+          <div class="text-end" v-else>
+            <button @click="logOut()">Logout</button>
+          </div>
         </div>
       </div>
+    </header>
+    <div class="container" style="width: 880px">
+      <RouterView />
     </div>
-  </header>
-  <div class="container"  style="width:880px;">
-    <RouterView />
   </div>
-</div>
 </template>
 
 <style scoped>
