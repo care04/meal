@@ -32,11 +32,25 @@ onBeforeMount(() => {
     <h1>Recipes</h1>
     <div v-if="recipeStore.recipes.length > 0">
       <div v-for="recipe in recipeStore.recipes" :key="recipe.id">
-        <button @click="edit(recipe.id)">
-          <i class="fa-sharp fa-solid fa-file-pen fa-xs"></i>
+        <button @click="edit(recipe.id)" style="margin-right: 10px" class="btn">
+          <span style="font-size: 1em; color: white">
+            <i class="fa-solid fa-file-pen"></i>
+          </span>
         </button>
-        <button @click="route(recipe.id)">{{ recipe.name }}</button>
-        <button @click="recipeStore.deleteRecipeSupa(recipe.id)">delete</button>
+        <span style="font-size: 1em; color: White"
+          ><button @click="route(recipe.id)" style="margin-right: 10px">
+            {{ recipe.name }}
+          </button></span
+        >
+        <button
+          @click="recipeStore.deleteRecipeSupa(recipe.id)"
+          type="button"
+          class="btn"
+        >
+          <span style="font-size: 1em; color: White">
+            <i class="fa-solid fa-trash"></i>
+          </span>
+        </button>
       </div>
     </div>
   </main>
