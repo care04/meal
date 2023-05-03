@@ -7,6 +7,12 @@ var adding = ref(false);
 var ingredient = {
   name: "",
 };
+function deleteIngredient(ingredient: any) {
+  console.log(ingredient);
+  var arrayIndex = listStore.items.indexOf(ingredient);
+  listStore.items.splice(arrayIndex, 1);
+  listStore.deleteItems(ingredient.id);
+}
 function cancel() {
   adding.value = false;
   ingredient.value = {};
@@ -62,10 +68,16 @@ onBeforeMount(() => {
         ><button @click="checkIngredient()" type="button" class="btn">Add ingredient</button>
       </div>
     </div>
-    <ol>
-      <li v-for="ingredient in listStore.items" :key="ingredient.id">
-        {{ ingredient.name }}
-      </li>
-    </ol>
+    <div v-if="listStore.items.length > 0">
+      <ol>
+        <li v-for="item in listStore.items" :key="item.id">
+          <button @click="deleteIngredient(item)" type="button" class="btn">
+            <span style="font-size: 1em; color: White">
+              <i class="fa-solid fa-trash"></i>
+            </span></button
+          >{{ item.name }}
+        </li>
+      </ol>
+    </div>
   </main>
 </template>

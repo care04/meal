@@ -19,7 +19,6 @@ export const useListStore = defineStore("list", {
   actions: {
     async addItems(item: any) {
       const userStore = useUserStore();
-      console.log("item sent", item.name);
       const { data, error } = await supabase
         .from("GroceryList")
         .insert([
@@ -32,18 +31,13 @@ export const useListStore = defineStore("list", {
         .single();
       if (error) {
         this.errorValue = error.message;
-        console.log("error: ", error.message);
       }
       if (data) {
         this.items.push(data);
-        console.log(data);
       }
     },
     async getItems() {
-      const { data, error } = await supabase
-        .from("GroceryList")
-        .select("*")
-        .single();
+      const { data, error } = await supabase.from("GroceryList").select("*");
       if (error) {
         this.errorValue = error.message;
       }
